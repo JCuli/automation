@@ -28,7 +28,7 @@ jobs:
         run: pip install pyinstaller
 
       - name: Build exe
-        run: pyinstaller --onefile --name automatismeVic --add-data "templates;templates" appcontrol.py
+        run: pyinstaller --name automatismeVic --add-data "templates;templates" appcontrol.py
 
       - name: Upload exe artifact
         uses: actions/upload-artifact@v4
