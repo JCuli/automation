@@ -28,7 +28,10 @@ jobs:
         run: pip install pyinstaller
 
       - name: Build exe
-        run: pyinstaller --name automatismeVic --add-data "templates;templates" appcontrol.py
+        run: pyinstaller --name automatismeVic appcontrol.py
+
+      - name: Copy default templates next to exe
+        run: Copy-Item -Recurse templates dist/automatismeVic/templates
 
       - name: Upload exe artifact
         uses: actions/upload-artifact@v4
