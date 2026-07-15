@@ -7,8 +7,16 @@ from dataclasses import dataclass, field
 from pathlib import Path
 import time
 import pyperclip
+import sys
 
 
+def resource_path(relative_path: str) -> Path:
+    """Get path to resource, works for dev and for PyInstaller bundle."""
+    if hasattr(sys, "_MEIPASS"):
+        base_path = Path(sys._MEIPASS)
+    else:
+        base_path = Path(__file__).parent
+    return base_path / relative_path
 
 
 class Screen:
@@ -79,7 +87,7 @@ class Detector:
                 )
         return Detection(found =False)
 
-detector = Detector(Path("templates"))
+detector = Detector(resource_path("templates"))
 
 def wait_for(temp_name: str, timeout: float = 5.0):
     deadline = time.monotonic() + timeout
